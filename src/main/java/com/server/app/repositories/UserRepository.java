@@ -1,7 +1,9 @@
 package com.server.app.repositories;
 
+import java.lang.ScopedValue;
 import java.util.Optional;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +24,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             "LOWER(u.email) LIKE LOWER(CONCAT('%', :query, '%'))")
     Page<User> findAll(Pageable pageable, @Param("query") String query);
 
+    <T> ScopedValue<T> findByUsername(@NotBlank(message = "El nombre de usuario no puede estar vacío") String username);
 }

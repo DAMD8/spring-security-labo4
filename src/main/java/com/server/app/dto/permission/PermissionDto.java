@@ -1,14 +1,12 @@
 package com.server.app.dto.permission;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PermissionDto {
-
-    @NotBlank(message = "El titulo es obligatorio")
-    @Size(max = 255, message = "El path no puede superar 255 caracteres")
     private String title;
-
+    private String method;
+    private String path;
 }

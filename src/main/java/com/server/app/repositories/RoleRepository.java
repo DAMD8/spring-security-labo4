@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.server.app.entities.Role;
 
+import java.lang.ScopedValue;
 import java.util.Optional;
 
 @EnableJpaRepositories
@@ -16,4 +17,6 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findById(Long aLong);
 
     Page<Role> findAll(Pageable pageable);
+
+    <T> ScopedValue<T> findByName(String admin);
 }

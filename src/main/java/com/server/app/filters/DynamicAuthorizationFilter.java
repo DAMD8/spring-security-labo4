@@ -34,7 +34,7 @@ public class DynamicAuthorizationFilter extends OncePerRequestFilter {
 
         if (authentication != null && authentication.isAuthenticated()) {
             if (!isAuthorized(authentication, method, path)) {
-                sendError(response, HttpServletResponse.SC_FORBIDDEN, "Acceso denegado: no tienes permisos para esta ruta: " + path);
+                sendError(response, "Acceso denegado: no tienes permisos para esta ruta: " + path);
                 return;
             }
         }
@@ -51,11 +51,11 @@ public class DynamicAuthorizationFilter extends OncePerRequestFilter {
         });
     }
 
-    private void sendError(HttpServletResponse response, int status, String message) throws IOException {
+    private void sendError(HttpServletResponse response, String message) throws IOException {
         if (response.isCommitted()) return;
-        response.setStatus(status);
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json;charset=UTF-8");
-        ExceptionResponse error = new ExceptionResponse(status, message);
+        ExceptionResponse error = new ExceptionResponse(HttpServletResponse.SC_FORBIDDEN, message);
         response.getWriter().write(objectMapper.writeValueAsString(error));
     }
 }

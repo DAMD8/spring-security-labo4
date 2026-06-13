@@ -113,6 +113,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (response.isCommitted()) return;
         response.setStatus(status);
         response.setContentType("application/json");
+
+        // Uso del constructor AllArgsConstructor de Lombok para evitar errores de mapeo
         ExceptionResponse error = new ExceptionResponse(status, message);
         response.getWriter().write(new ObjectMapper().writeValueAsString(error));
     }

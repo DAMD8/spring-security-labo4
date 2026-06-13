@@ -1,55 +1,33 @@
 package com.server.app.entities.impl;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.server.app.entities.Role;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-@Table(name = "users")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Builder
+@Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(unique = true, nullable = false)
     private String username;
-
-    @Column
+    private String password;
     private String name;
-
-    @Column
     private String surname;
-
-    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+    @Column(name = "is_blocked")
+    private boolean isBlocked;
 
-    @Column(nullable = false)
-    @ColumnDefault("false")
-    @Builder.Default
-    private boolean blocked = false;
-
-    @PrePersist
-    @PreUpdate
-    private void encryptPassword() {
-        if (password != null && !password.startsWith("$2a$")) {
-            this.password = new BCryptPasswordEncoder().encode(this.password);
-        }
-    }
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 }

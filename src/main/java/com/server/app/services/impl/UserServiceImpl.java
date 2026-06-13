@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public AuthResponse login(LoginRequest request) {
-        User user = userRepository.findByUsername(request.getUsername())
+        User user = (User) userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new BadCredentialsException("Credenciales inválidas"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public AuthResponse signUp(UserCreateDto request) {
-        Role defaultRole = roleRepository.findByName("ADMIN")
+        Role defaultRole = (Role) roleRepository.findByName("ADMIN")
                 .orElseThrow(() -> new IllegalStateException("Error interno: Rol base no configurado"));
 
         User user = new User();

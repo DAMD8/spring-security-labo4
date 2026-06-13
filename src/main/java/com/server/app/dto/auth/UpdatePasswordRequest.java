@@ -1,11 +1,11 @@
 package com.server.app.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Setter
-@Getter
+@Data
+@NoArgsConstructor
 public class UpdatePasswordRequest {
     @NotBlank(message = "La contraseña antigua es obligatoria")
     private String oldpassword;
@@ -15,5 +15,4 @@ public class UpdatePasswordRequest {
 
     @NotBlank(message = "La confirmación es obligatoria")
     private String confirmpassword;
-
 }

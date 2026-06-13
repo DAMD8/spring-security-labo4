@@ -10,5 +10,6 @@ public record Pagination<T>(
     }
 
     public void setPagination(PaginationMeta meta) {
+
     }
 }

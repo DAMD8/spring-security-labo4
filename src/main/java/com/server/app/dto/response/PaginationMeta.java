@@ -16,5 +16,6 @@ public record PaginationMeta(
     }
 
     public void setTotal(int totalElements) {
+
     }
 }
