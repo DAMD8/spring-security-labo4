@@ -11,6 +11,7 @@ import com.server.app.entities.impl.User;
 import com.server.app.repositories.RoleRepository;
 import com.server.app.repositories.UserRepository;
 import com.server.app.services.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -101,5 +102,20 @@ public class UserServiceImpl implements UserService {
     public User findById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+    }
+
+    @Override
+    public User create(UserCreateDto dto) {
+        return null;
+    }
+
+    @Override
+    public Page<User> findAll(int page, int size, String search) {
+        return null;
+    }
+
+    @Override
+    public User updateUser(int id, UserUpdateDto dto) {
+        return null;
     }
 }

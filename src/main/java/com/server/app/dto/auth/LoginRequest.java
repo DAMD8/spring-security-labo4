@@ -1,7 +1,11 @@
 package com.server.app.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class LoginRequest {
     @NotBlank(message = "El nombre de usuario no puede estar vacío")
     private String username;

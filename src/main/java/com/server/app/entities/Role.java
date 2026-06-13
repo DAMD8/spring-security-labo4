@@ -2,6 +2,8 @@ package com.server.app.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Arrays;
 import java.util.Set;
 
 @Table(name = "roles")
@@ -28,4 +30,8 @@ public class Role {
   @EqualsAndHashCode.Exclude
   @ToString.Exclude
   private Set<Permission> permissions;
+
+    public Arrays getRolePermissions() {
+        return null;
+    }
 }

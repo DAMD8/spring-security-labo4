@@ -1,7 +1,11 @@
 package com.server.app.entities.impl;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "categorias")
 public class Categoria {
